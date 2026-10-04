@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <stdint.h>
+#include <stdint.h>   //заголовочный файл с типами фиксированной ширины и их пределами
 
 int main(void) {
-    int packet_id;
+    int packet_id;  
     unsigned int status_oct;
     float voltage;
     uint8_t status_code;

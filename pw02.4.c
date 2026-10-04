@@ -1,14 +1,24 @@
 #include <stdio.h>
-#include <limits.h>
+#include <limits.h>   //заголовочный файл, в котором лежат готовые константы с пределами целых типов
 
 int main(void) {
     printf("INT_MIN: %d\n", INT_MIN);
     printf("INT_MAX: %d\n", INT_MAX);
     printf("UINT_MAX: %u\n", UINT_MAX);
 
-    // Проверка: (unsigned)INT_MAX + 1 == 0? Нет.
-    // RANGE_OK = 1, если (unsigned)INT_MAX + 1 > INT_MAX (в unsigned)
-    int range_ok = ((unsigned)INT_MAX + 1u) > (unsigned)INT_MAX;
+    // INT_MAX * 2 в типе int — это переполнение.
+    // А при переполнении знакового int стандарт Си говорит:
+    // "поведение не определено" (UB). То есть результат может быть любым:
+    // 0, -2, случайное число, или программа вообще упадёт. Гарантий нет.
+    //
+    // Поэтому приводим к unsigned int. В беззнаковом типе переполнение
+    // работает как счётчик: после максимума идёт 0, потом 1, и так далее.
+    // Это описано в стандарте, результат всегда предсказуем.
+    //
+    // Считаем: (unsigned)INT_MAX * 2 + 1 = 4294967295 = UINT_MAX.
+    // Сравнение даёт истину (1).
+
+    int range_ok = ((unsigned int)INT_MAX * 2u + 1u == UINT_MAX);
     printf("RANGE_OK: %d\n", range_ok);
 
     return 0;

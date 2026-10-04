@@ -1,11 +1,15 @@
 #include <stdio.h>
-#include <stdbool.h>
+#include <stdbool.h>  //заголовочный файл, который добавляет в Си логический тип bool- хранит true and false
 
 int main() {
+    int a, b;
     bool module_ready, fault_state;
 
     printf("Введи два числа: ");
-    scanf("%d %d", (int*)&module_ready, (int*)& fault_state);
+    scanf("%d %d", &a, &b);
+    
+    module_ready = a;
+    fault_state = b;
 
     printf("MODULE_READY: %d\n", module_ready);
     printf("FAULT_STATE: %d\n", fault_state);
